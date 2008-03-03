@@ -54,7 +54,7 @@ function bb2_post($settings, $package)
 //		if ($ip && $ip_screener && abs($ip_screener - $ip) > 256)
 //			return "c1fa729b";
 
-		if ($package['headers_mixed']['X-Forwarded-For']) {
+		if (isset($package['headers_mixed']['X-Forwarded-For'])) {
 			$ip = $package['headers_mixed']['X-Forwarded-For'];
 		}
 		// Screen for user agent changes
