@@ -36,7 +36,12 @@ function bb2_post($settings, $package)
 	if (isset($_POST[BB2_COOKIE])) {
 		$screener2 = explode(" ", $_POST[BB2_COOKIE]);
 	}
-	$screener = max($screener1[0], $screener2[0]);
+	if (!empty($screener1[0]) && !empty($screene2[0])) {
+		$screener = max($screener1[0], $screener2[0]);
+	}
+	else {
+		$screener = 0;
+	}
 
 	if ($screener > 0) {
 		// Posting too fast? 5 sec
