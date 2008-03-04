@@ -146,7 +146,8 @@ function bb2_insert_stats($force = false) {
 	if ($force || $settings['display_stats']) {
 		$blocked = bb2_db_query("SELECT COUNT(*) FROM " . $settings['log_table'] . " WHERE `key` NOT LIKE '00000000'");
 		if ($blocked !== FALSE) {
-			return $blocked[0]['count'];
+			$ret = $blocked->fetchRow();
+			return $ret['count'];
 		}
 	}
 }
