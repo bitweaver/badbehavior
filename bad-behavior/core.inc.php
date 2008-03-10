@@ -72,7 +72,7 @@ function bb2_banned($settings, $package, $key, $previous_key=false)
 	die();
 }
 
-function bb2_approved($settings, $package)
+function bb2_approved($settings, $package, $whitelisted=FALSE)
 {
 	// Dirk wanted this
 	if (is_callable('bb2_approved_callback')) {
@@ -80,7 +80,7 @@ function bb2_approved($settings, $package)
 	}
 
 	// Decide what to log on approved requests.
-	if ($settings['verbose'] || empty($package['user_agent'])) {
+	if ($settings['verbose'] || (!$whitelisted && empty($package['user_agent']))) {
 		bb2_db_query(bb2_insert($settings, $package, "00000000"));
 	}
 }
@@ -115,7 +115,7 @@ function bb2_start($settings)
 	$request_method = $_SERVER['REQUEST_METHOD'];
 	$request_uri = $_SERVER['REQUEST_URI'];
 	$server_protocol = $_SERVER['SERVER_PROTOCOL'];
-	$user_agent = $_SERVER['HTTP_USER_AGENT'];
+	$user_agent = !empty( $_SERVER['HTTP_USER_AGENT'] ) ? $_SERVER['HTTP_USER_AGENT'] : NULL;
 
 	// Reconstruct the HTTP entity, if present.
 	$request_entity = array();
@@ -132,7 +132,7 @@ function bb2_start($settings)
 
 	// First check the whitelist
 	require_once(BB2_CORE . "/whitelist.inc.php");
-	if (!bb2_whitelist($package)) {
+	if (!($whitelisted = bb2_whitelist($package))) {
 		// Now check the blacklist
 		require_once(BB2_CORE . "/blacklist.inc.php");
 		bb2_test($settings, $package, bb2_blacklist($package));
@@ -197,7 +197,7 @@ function bb2_start($settings)
 	bb2_screener($settings, $package);
 
 	// And that's about it.
-	bb2_approved($settings, $package);
+	bb2_approved($settings, $package, $whitelisted);
 	return true;
 }
 ?>

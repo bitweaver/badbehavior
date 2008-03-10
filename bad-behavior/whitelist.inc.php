@@ -10,6 +10,11 @@ function bb2_whitelist($package)
 
 	// IP address ranges use the CIDR format.
 
+	// check for override file and use that to allow for customization for local setup
+	if( file_exists( BADBEHAVIOR_PKG_PATH.'whitelist_config_inc.php' ) ) {
+		include_once( BADBEHAVIOR_PKG_PATH.'whitelist_config_inc.php' );
+	} else {
+ 
 	// Includes four examples of whitelisting by IP address and netblock.
 	$bb2_whitelist_ip_ranges = array(
 		"64.191.203.34",	// Digg whitelisted as of 2.0.12
@@ -19,6 +24,8 @@ function bb2_whitelist($package)
 		"192.168.0.0/16",
 //		"127.0.0.1",
 	);
+
+	}
 
 	// DANGER! DANGER! DANGER! DANGER! DANGER! DANGER! DANGER! DANGER!
 
