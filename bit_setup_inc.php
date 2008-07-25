@@ -1,5 +1,5 @@
 <?php
-global $gBitSystem, $gBitSmarty;
+global $gBitSystem, $gBitSmarty, $gShellScript;
 
 $registerHash = array(
 	'package_name' => 'badbehavior',
@@ -8,7 +8,7 @@ $registerHash = array(
 	);
 $gBitSystem->registerPackage( $registerHash );
 
-if( $gBitSystem->isPackageActive( 'badbehavior' ) ) {
+if( $gBitSystem->isPackageActive( 'badbehavior' ) && ( empty($gShellScript) || $gShellScript == FALSE ) ) {
 
 	require_once(BADBEHAVIOR_PKG_PATH.'bad-behavior.php');
 
