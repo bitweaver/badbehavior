@@ -58,7 +58,12 @@ function bb2_db_affected_rows() {
 // Escape a string for database usage
 function bb2_db_escape($string) {
 	global $gBitSystem;
-	return $string;
+	switch ($gBitSystem->mDb->mType) {
+	case 'postgres':
+		return pg_escape_string($string);
+	default:
+		return mysql_escape_string($string);
+	}
 }
 
 // Return the number of rows in a particular query.
