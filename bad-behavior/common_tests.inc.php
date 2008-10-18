@@ -22,7 +22,11 @@ function bb2_protocol($settings, $package)
 
 function bb2_misc_headers($settings, $package)
 {
-	$ua = $package['headers_mixed']['User-Agent'];
+	if (!empty($package['header_mixed']['User-Agent'])) {
+		$ua = $package['headers_mixed']['User-Agent'];
+	} else {
+		$ua = '';
+	}
 
 	if (!strcmp($package['request_method'], "POST") && empty($ua)) {
 		return "f9f2b8b9";
