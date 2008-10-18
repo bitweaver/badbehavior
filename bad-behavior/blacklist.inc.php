@@ -86,7 +86,7 @@ function bb2_blacklist($package) {
 
 	// Do not edit below this line.
 
-	if (!empty($package['header_mixed']['User-Agent'])) {
+	if (!empty($package['headers_mixed']['User-Agent'])) {
 		$ua = $package['headers_mixed']['User-Agent'];
 	} else {
 		$ua = '';
