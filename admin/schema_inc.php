@@ -28,7 +28,6 @@ $gBitInstaller->registerPackageInfo( BADBEHAVIOR_PKG_NAME, array(
 		) );
 
 $indices = array (
-	'user_agent_idx' => array( 'table' => 'badbehavior', 'cols' => 'user_agent', 'opts' => NULL ),
 	'ip_idx' => array( 'table' => 'badbehavior', 'cols' => 'ip', 'opts' => NULL ),
 	);
 $gBitInstaller->registerSchemaIndexes( LIBERTY_PKG_NAME, $indices );
