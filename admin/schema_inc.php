@@ -23,18 +23,18 @@ foreach( array_keys( $tables ) AS $tableName ) {
 }
 
 $gBitInstaller->registerPackageInfo( BADBEHAVIOR_PKG_NAME, array(
-		 'description' => "<a href=\"http://www.bad-behavior.ioerror.us/\">Bad Behavior</a> analyzes how people are using the site in order to try to prevent spammers from posting.",
-		'license' => '<a href="http://www.gnu.org/licenses/licenses.html#GPL">GPL</a>',
-		) );
+	'description' => "<a href=\"http://www.bad-behavior.ioerror.us/\">Bad Behavior</a> analyzes how people are using the site in order to try to prevent spammers from posting.",
+	'license' => '<a href="http://www.gnu.org/licenses/licenses.html#GPL">GPL</a>',
+) );
 
 $indices = array (
 	'ip_idx' => array( 'table' => 'badbehavior', 'cols' => 'ip', 'opts' => NULL ),
-	);
-$gBitInstaller->registerSchemaIndexes( LIBERTY_PKG_NAME, $indices );
+);
+$gBitInstaller->registerSchemaIndexes( BADBEHAVIOR_PKG_NAME, $indices );
 
 // ### Default UserPermissions
 $gBitInstaller->registerUserPermissions( BADBEHAVIOR_PKG_NAME, array(
 		array('p_badbehavior_admin', 'Can admin bad behavior', 'admin', BADBEHAVIOR_PKG_NAME ),
-		));
+));
 
 ?>
